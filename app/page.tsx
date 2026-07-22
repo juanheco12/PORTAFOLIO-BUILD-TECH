@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import About from "@/components/About";
+import Process from "@/components/Process";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import MidCTA from "@/components/MidCTA";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Stats />
       <About />
+      <Process />
       <TechStack />
       <Projects />
       <MidCTA />
