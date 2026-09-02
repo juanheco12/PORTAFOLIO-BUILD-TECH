@@ -1,3 +1,5 @@
+import ScrollReveal from "@/components/ScrollReveal";
+
 type Project = {
   name: string;
   desc: string;
@@ -5,8 +7,9 @@ type Project = {
   stack: string[];
   impact: string;
   color: "cyan" | "azul" | "verde";
-  github: string;
+  github?: string;
   demo?: string;
+  private?: boolean;
 };
 
 const projects: Project[] = [
@@ -62,6 +65,36 @@ const projects: Project[] = [
     color: "azul",
     github: "https://github.com/juanheco12/VALIDADOR-CATASTRAL",
   },
+  {
+    name: "Variedades Medellín",
+    desc: "Sistema POS e Inventario",
+    detail:
+      "Panel de escritorio más PWA para el mostrador que sigue cobrando sin señal y sincroniza las ventas solas al volver la conexión. Reemplaza el cuaderno de papel del negocio.",
+    stack: ["Next.js", "FastAPI", "PWA Offline-first"],
+    impact: "0 señal, 0 ventas perdidas 📴",
+    color: "verde",
+    private: true,
+  },
+  {
+    name: "CAD Libre",
+    desc: "Visor DWG → DXF Georreferenciado",
+    detail:
+      "App de escritorio que abre archivos DWG, los visualiza y los exporta a DXF, Shapefile y PDF conservando coordenadas, CRS y capas intactas, con el mismo motor que usa QGIS.",
+    stack: ["Electron", "Python", "React"],
+    impact: "100% fidelidad geoespacial 🗺️",
+    color: "cyan",
+    github: "https://github.com/juanheco12/cad-libre",
+  },
+  {
+    name: "Software Contable",
+    desc: "Gestión Contable & Facturación DIAN",
+    detail:
+      "Plataforma contable para firmas colombianas: normalización automática contra el PUC, catálogo de terceros con validación de NIT y facturación electrónica DIAN vía Factus.",
+    stack: ["Next.js", "FastAPI", "PostgreSQL"],
+    impact: "MVP en construcción 🚧",
+    color: "azul",
+    private: true,
+  },
 ];
 
 const colorMap: Record<Project["color"], { text: string; border: string; bg: string }> = {
@@ -84,72 +117,84 @@ export default function Projects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => {
+          {projects.map((project, i) => {
             const colors = colorMap[project.color];
             return (
-              <article
-                key={project.name}
-                className="card-glow rounded-2xl bg-white/[0.03] p-7 flex flex-col"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-2xl font-bold">{project.name}</h3>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ver ${project.name} en GitHub`}
-                    className="shrink-0 text-white/40 hover:text-cyan transition-colors"
+              <ScrollReveal key={project.name} delay={(i % 3) * 100}>
+                <article className="card-glow rounded-2xl bg-white/[0.03] p-7 flex flex-col h-full">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-2xl font-bold">{project.name}</h3>
+                    {project.github ? (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Ver ${project.name} en GitHub`}
+                        className="shrink-0 text-white/40 hover:text-cyan transition-colors"
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <span
+                        title="Repositorio privado"
+                        className="shrink-0 text-xs font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/40"
+                      >
+                        Privado
+                      </span>
+                    )}
+                  </div>
+                  <p className={`mt-1 text-sm font-medium ${colors.text}`}>
+                    {project.desc}
+                  </p>
+                  <p className="mt-4 text-sm text-white/70 flex-1">
+                    {project.detail}
+                  </p>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs font-medium rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/70"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div
+                    className={`mt-6 rounded-xl border ${colors.border} ${colors.bg} px-4 py-3 text-center font-bold ${colors.text}`}
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-                      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
-                    </svg>
-                  </a>
-                </div>
-                <p className={`mt-1 text-sm font-medium ${colors.text}`}>
-                  {project.desc}
-                </p>
-                <p className="mt-4 text-sm text-white/70 flex-1">
-                  {project.detail}
-                </p>
+                    {project.impact}
+                  </div>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs font-medium rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/70"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div
-                  className={`mt-6 rounded-xl border ${colors.border} ${colors.bg} px-4 py-3 text-center font-bold ${colors.text}`}
-                >
-                  {project.impact}
-                </div>
-
-                <div className="mt-4 flex gap-4 text-sm">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white/60 hover:text-white transition-colors"
-                  >
-                    Ver código →
-                  </a>
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${colors.text} hover:underline`}
-                    >
-                      Demo en vivo →
-                    </a>
+                  {(project.github || project.demo) && (
+                    <div className="mt-4 flex gap-4 text-sm">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white/60 hover:text-white transition-colors"
+                        >
+                          Ver código →
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${colors.text} hover:underline`}
+                        >
+                          Demo en vivo →
+                        </a>
+                      )}
+                    </div>
                   )}
-                </div>
-              </article>
+                </article>
+              </ScrollReveal>
             );
           })}
         </div>
