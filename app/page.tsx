@@ -7,22 +7,49 @@ import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import MidCTA from "@/components/MidCTA";
 import Services from "@/components/Services";
+import Packages from "@/components/Packages";
+import WhyMe from "@/components/WhyMe";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden">
       <Header />
       <Hero />
-      <Stats />
-      <About />
-      <Process />
-      <TechStack />
+      <ScrollReveal>
+        <Stats />
+      </ScrollReveal>
+      <ScrollReveal>
+        <About />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Process />
+      </ScrollReveal>
+      <ScrollReveal>
+        <TechStack />
+      </ScrollReveal>
       <Projects />
-      <MidCTA />
-      <Services />
-      <Contact />
+      <ScrollReveal>
+        <MidCTA />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Services />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Packages />
+      </ScrollReveal>
+      <ScrollReveal>
+        <WhyMe />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FAQ />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Contact />
+      </ScrollReveal>
       <Footer />
     </main>
   );
