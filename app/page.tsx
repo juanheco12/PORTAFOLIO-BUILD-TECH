@@ -7,6 +7,9 @@ import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import MidCTA from "@/components/MidCTA";
 import Services from "@/components/Services";
+import Packages from "@/components/Packages";
+import WhyMe from "@/components/WhyMe";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -34,6 +37,15 @@ export default function Home() {
       </ScrollReveal>
       <ScrollReveal>
         <Services />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Packages />
+      </ScrollReveal>
+      <ScrollReveal>
+        <WhyMe />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FAQ />
       </ScrollReveal>
       <ScrollReveal>
         <Contact />
