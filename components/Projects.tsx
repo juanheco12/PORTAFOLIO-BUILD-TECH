@@ -14,6 +14,36 @@ type Project = {
 
 const projects: Project[] = [
   {
+    name: "Prime Dispatch",
+    desc: "Plataforma de Mensajería y Domicilios",
+    detail:
+      "Gestión completa de domicilios para Montería: la oficina recibe y despacha pedidos, el mensajero entrega desde el celular y el cliente sigue su envío en vivo. Instalable como app y con avisos sin internet.",
+    stack: ["Next.js 16", "PostgreSQL", "Supabase"],
+    impact: "Seguimiento en vivo 📍",
+    color: "cyan",
+    private: true,
+  },
+  {
+    name: "BarberPro",
+    desc: "Gestión Integral para Barberías",
+    detail:
+      "Panel administrativo con agenda inteligente sin dobles reservas, disponibilidad en tiempo real por barbero, dashboard de ingresos y un portal público de reservas por negocio.",
+    stack: ["Next.js 15", "Prisma", "PostgreSQL"],
+    impact: "Reservas 24/7 💈",
+    color: "azul",
+    private: true,
+  },
+  {
+    name: "ByLove Sport",
+    desc: "POS e Inventario Multi-sede",
+    detail:
+      "Punto de venta e inventario para fabricante de ropa deportiva operando dos sedes a la vez (Montería y Medellín), con variantes talla×color, precio detal/mayor automático y avisos por WhatsApp.",
+    stack: ["Next.js", "PWA Offline", "PostgreSQL"],
+    impact: "2 sedes, 1 sistema 🏬",
+    color: "verde",
+    private: true,
+  },
+  {
     name: "CatIA",
     desc: "Generador de Motivadas Catastrales",
     detail:

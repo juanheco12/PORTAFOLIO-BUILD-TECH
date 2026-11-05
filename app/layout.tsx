@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AmbientBackground from "@/components/AmbientBackground";
-import ScrollRobot from "@/components/ScrollRobot";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -32,7 +31,6 @@ export default function RootLayout({
     <html lang="es">
       <body className="antialiased">
         <AmbientBackground />
-        <ScrollRobot />
         {children}
       </body>
     </html>
